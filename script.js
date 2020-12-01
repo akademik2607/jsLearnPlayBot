@@ -1,31 +1,33 @@
 "use strict";
 
-const plaing = function(){
-    let result = Math.floor((Math.random() * 100) + 1);
-    alert(result);
-    let ans = prompt("Угадайте число от 1 до 100");
-    alert(ans);
-    const action = function(ans){
-        if(isNaN(+ans) || ans === ''){
-            ans = prompt("Введите число");
-            action(ans);
+const isNumber = function(num){
+    return !isNaN(parseInt(num)) && isFinite(num);
+};
+
+const play = function(){
+    const result = Math.floor((Math.random() * 100) + 1);
+    const answer = prompt("Угадайте число от 1 до 100");
+    const action = function(answer){
+        if(!isNumber(answer) || answer === ''){
+            answer = prompt("Введите число");
+            action(answer);
         }
-        else if(ans === null){alert("Пока");}
-        else if(+ans < result){
-            ans = prompt("Загаданное число больше");
-            action(ans);
+        else if(answer === null){alert("Игра окончена!");}
+        else if(+answer < result){
+            answer = prompt("Загаданное число больше");
+            action(answer);
         }
-        else if(+ans > result){
-            ans = prompt("Загаданное число меньше");
-            action(ans);
+        else if(+answer > result){
+            answer = prompt("Загаданное число меньше");
+            action(answer);
         }
-        else if(+ans === result){
+        else if(+answer === result){
             alert("Вы выиграли!!!");
         }
         return;
 
     };
-    action(ans);
+    action(answer);
 };
 
-plaing();
+play();
